@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="p-4">
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" action="{% url 'edit_measurement_chart' pk=project.id id=measurement_chart.id %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Item</label>
+                            {{form.item2}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">POM</label>
+                            {{form.pom}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Description</label>
+                            {{form.description2}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">XS</label>
+                            {{form.xtra_small}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">S</label>
+                            {{form.small}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">M</label>
+                            {{form.medium}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">L</label>
+                            {{form.large}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">XL</label>
+                            {{form.xtra_large}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">2XL</label>
+                            {{form.xtra_large2}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">3XL</label>
+                            {{form.xtra_large3}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">TOL (+)</label>
+                            {{form.tol_plus}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">TOL (-)</label>
+                            {{form.tol_minus}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Comments</label>
+                            {{form.comments2}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Issue Code</label>
+                            {{form.issue_code2}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Issue Description</label>
+                            {{form.issue_description2}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Criticality</label>
+                            {{form.criticality2}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">SILQ Comments</label>
+                            {{form.silq_comment2}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Option 1</label>
+                            {{form.option_1_2}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Option 2</label>
+                            {{form.option_2_2}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Option 3</label>
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            {{form.option_3_2}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Customer Response</label>
+                            {{form.customer_response2}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <!-- <div class="col">
+                                        </div> -->
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="">
+                        <button class="btn btn-success" type="submit">Update</button>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="">
+                        <button class="btn btn-danger" type="button" data-toggle="modal"
+                            data-target="#exampleModal">Delete</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- modal for delete  -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'delete_measurement_chart' pk=project.id id=measurement_chart.id %}" method="post">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <h2>Are You Sure You Want To Delete This Bill Of Materials ?</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Yes I am Sure</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('id_item2').classList.add('form-control');
+        document.getElementById('id_description2').classList.add('form-control');
+        document.getElementById('id_pom').classList.add('form-control');
+        document.getElementById('id_xtra_small').classList.add('form-control');
+        document.getElementById('id_small').classList.add('form-control');
+        document.getElementById('id_medium').classList.add('form-control');
+        document.getElementById('id_large').classList.add('form-control');
+        document.getElementById('id_xtra_large').classList.add('form-control');
+        document.getElementById('id_xtra_large2').classList.add('form-control');
+        document.getElementById('id_xtra_large3').classList.add('form-control');
+        document.getElementById('id_tol_plus').classList.add('form-control');
+        document.getElementById('id_tol_minus').classList.add('form-control');
+        document.getElementById('id_comments2').classList.add('form-control');
+        document.getElementById('id_issue_code2').classList.add('form-control');
+        document.getElementById('id_issue_description2').classList.add('form-control');
+        document.getElementById('id_criticality2').classList.add('form-control');
+        document.getElementById('id_silq_comment2').classList.add('form-control');
+        document.getElementById('id_option_1_2').classList.add('form-control');
+        document.getElementById('id_option_2_2').classList.add('form-control');
+        document.getElementById('id_option_3_2').classList.add('form-control');
+        document.getElementById('id_customer_response2').classList.add('form-control');
+</script>
+{% endblock %}

@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="p-4">
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" action="{% url 'edit_style_data' pk=customer.id id=style_data.id %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">PO Name</label>
+                            <select class="form-control" name='po_select' id="exampleFormControlSelect1">
+                                <option value="" id="first_select">Select</option>
+                                {% for sum in po_summary_data %}
+                                {% ifchanged sum.project_name %}
+                                <option value="{{sum.project_name}}" name='po_name'>{{sum.project_name}}</option>
+                                {% endifchanged %}
+                                {% endfor %}
+                            </select>
+                            <div style="display: none;">
+                                {{style_data_form.po_name}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Style Name</label>
+                            {{style_data_form.style_name}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Style #</label>
+                            {{style_data_form.style_hash}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Customer Style Item Description</label>
+                            {{style_data_form.customer_style_item_description}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Color</label>
+                            {{style_data_form.color}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Sample</label>
+                            {{style_data_form.sample}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Sample Comment</label>
+                            {{style_data_form.sample_comment}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Sample Quantity</label>
+                            {{style_data_form.sample_quantity}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Assigned Inspector</label>
+                            {{style_data_form.assigned_inspector}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Status From Vendor</label>
+                            {{style_data_form.status_from_vendor}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Date Recieved From Vendor</label>
+                            {{style_data_form.date_recieved_from_vendor}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">SILQ Approval Status</label>
+                            {{style_data_form.silq_approval_status}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">SILQ Comments</label>
+                            {{style_data_form.silq_comment}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Date Sent to Customer</label>
+                            {{style_data_form.date_sent_to_customer}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Courier Number</label>
+                            {{style_data_form.courier_number}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Approval Status From Customer</label>
+                            {{style_data_form.approval_status_from_customer}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Date Approved by Customer</label>
+                            {{style_data_form.date_approved_by_customer}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Comments from Customer</label>
+                            {{style_data_form.comment_from_customer}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="">
+                        <button class="btn btn-success" type="submit">Update</button>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="">
+                        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- modal for delete  -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'delete_style_data' pk=customer.id id=style_data.id %}" method="post">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <h2>Are You Sure You Want To Delete This Bill Of Materials ?</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Yes I am Sure</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('first_select').innerHTML = '{{style_data.po_name}}';
+    document.getElementById('id_po_name').classList.add('form-control');
+        document.getElementById('id_style_name').classList.add('form-control');
+        document.getElementById('id_style_hash').classList.add('form-control');
+        document.getElementById('id_customer_style_item_description').classList.add('form-control');
+        document.getElementById('id_color').classList.add('form-control');
+        document.getElementById('id_sample').classList.add('form-control');
+        document.getElementById('id_sample_comment').classList.add('form-control');
+        document.getElementById('id_sample_quantity').classList.add('form-control');
+        document.getElementById('id_assigned_inspector').classList.add('form-control');
+        document.getElementById('id_status_from_vendor').classList.add('form-control');
+        document.getElementById('id_date_recieved_from_vendor').classList.add('form-control');
+        document.getElementById('id_date_recieved_from_vendor').setAttribute('type', 'date');
+        document.getElementById('id_silq_approval_status').classList.add('form-control');
+        document.getElementById('id_silq_comment').classList.add('form-control');
+        document.getElementById('id_date_sent_to_customer').classList.add('form-control');
+        document.getElementById('id_date_sent_to_customer').setAttribute('type', 'date');
+        document.getElementById('id_courier_number').classList.add('form-control');
+        document.getElementById('id_approval_status_from_customer').classList.add('form-control');
+        document.getElementById('id_date_approved_by_customer').classList.add('form-control');
+        document.getElementById('id_date_approved_by_customer').setAttribute('type', 'date');
+        document.getElementById('id_comment_from_customer').classList.add('form-control');
+</script>
+{% endblock %}

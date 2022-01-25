@@ -1,0 +1,1022 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    table.fixed {table-layout:fixed; width: 4000px;}
+    /* table.fixed td {overflow:hidden;} */
+    /* table.fixed { table-layout:fixed; }
+    table.fixed td { overflow: hidden; } */
+</style>
+<!-- <h3>Project Profile</h3> -->
+<div class="row">
+    <div class="col">
+        <div class="material-card card">
+            <div class="card-body">
+                <h4 class="card-title">{{project.project_name}} <span class="badge badge-success"><strong>{{project.customer.user.first_name}}</strong></span></h4><br>
+                <ul class="nav nav-pills mt-4 mb-1">
+                    <li class=" nav-item"> <a href="#navpills-1" class="nav-link active" data-toggle="tab"
+                            aria-expanded="false">Issue Overview</a> </li>
+                    <li class="nav-item"> <a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Bill of Materials</a> </li>
+                    <li class="nav-item"> <a href="#navpills-3" class="nav-link" data-toggle="tab" aria-expanded="false">Measurement
+                            Chart</a> </li>
+                    <li class="nav-item"> <a href="#navpills-4" class="nav-link" data-toggle="tab" aria-expanded="false">Other
+                            Issues</a> </li>
+                </ul>
+                <div class="tab-content border p-4">
+                    <div id="navpills-1" class="tab-pane active">
+                        <div class="">
+                            <div>
+                                <div class="">
+                                    <h1><span class="badge badge-secondary">Style Overview</span></h1>
+                                    <div class="float-right">
+                                        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModalCenter3">
+                                            <i class="fas fa-edit">edit</i>
+                                        </button>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 col-xs-6 b-r"> <strong>Date</strong>
+                                            <br>
+                                            <p class="text-muted">{{project.date}}</p>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6 b-r"> <strong>Versions</strong>
+                                            <br>
+                                            <p class="text-muted">{{project.version}}</p>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6 b-r"> <strong>Style</strong>
+                                            <br>
+                                            <p class="text-muted">{{project.style}}</p>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6"> <strong>Description</strong>
+                                            <br>
+                                            <p class="text-muted">{{project.project_description}}</p>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6 b-r"> <strong>Style #</strong>
+                                            <br>
+                                            <p class="text-muted">{{project.style_hash}}</p>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6 b-r"> <strong>Image Link</strong>
+                                            <br>
+                                            <p class="text-muted">{{project.image_link}}</p>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6 b-r"> <strong>PDF Link</strong>
+                                            <br>
+                                            <p class="text-muted">{{project.pdf_link}}</p>
+                                        </div>
+                                        <div class="col-md-3 col-xs-6"> <strong>Message From Client</strong>
+                                            <br>
+                                            <p class="text-muted">{{project.project_note}}</p>
+                                        </div>
+                                    </div>
+                                    <hr>                                
+                                </div>  
+                            </div>
+                            <h1><span class="badge badge-secondary">Issue Summary</span></h1>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered" id="file_export">
+                                    <thead>
+                                        <tr>
+                                            <th>Section</th>
+                                            <th>Item #</th>
+                                            <th>Issue Description</th>
+                                            <th>Criticality</th>
+                                            <th>SILQ Comments</th>
+                                            <th>Client Response</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for bill in bill_of_material_data %}
+                                        {% if bill.issue_code == '1' %}
+                                        <tr>
+                                            <td>Bill Of Materials</td>
+                                            <td>{{bill.item}}</td>
+                                            <td>{{bill.issue_description}}</td>
+                                            <td>{{bill.criticality}}</td>
+                                            <td>{{bill.silq_comment}}</td>
+                                            <td>{{bill.customer_response}}</td>
+                                            <!-- <td>{{student.marks}}</td> -->
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+
+                                        {% for measure in measurement_chart_data %}
+                                        {% if measure.issue_code2 == '1' %}
+                                        <tr>
+                                            <td>Measurement Chart</td>
+                                            <td>{{measure.item2}}</td>
+                                            <td>{{measure.issue_description2}}</td>
+                                            <td>{{measure.criticality2}}</td>
+                                            <td>{{measure.silq_comment2}}</td>
+                                            <td>{{measure.customer_response2}}</td>
+                                            <!-- <td>{{student.marks}}</td> -->
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+
+                                        {% for issue in other_issue_data %}
+                                        {% if issue.issue_code3 == '1' %}
+                                        <tr>
+                                            <td>{{issue.section}}</td>
+                                            <td>{{issue.item3}}</td>
+                                            <td>{{issue.issue_description3}}</td>
+                                            <td>{{issue.criticality3}}</td>
+                                            <td>{{issue.silq_comments3}}</td>
+                                            <td>{{issue.customer_response_3}}</td>
+                                            <!-- <td>{{student.marks}}</td> -->
+                                        </tr>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="navpills-2" class="tab-pane">
+                        <div class="row">
+                            <div class="col"> pills 2
+                                <div class="float-right">
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" >
+                                            Add New
+                                        </button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered fixed" id="file_export">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Item</th>
+                                                <th>Style Item</th>
+                                                <th>Description</th>
+                                                <th>Color</th>
+                                                <th>Item Content</th>
+                                                <th>Placement</th>
+                                                <th>Size</th>
+                                                <th>Quantity</th>
+                                                <th>Supplier</th>
+                                                <th>Comments</th>
+                                                <th>Pricing Estimate</th>
+                                                <th>Image</th>
+                                                <th>Issue Code</th>
+                                                <th>Issue Description</th>
+                                                <th>Criticality</th>
+                                                <th>SILQ Comments</th>
+                                                <th>Option 1</th>
+                                                <th>Option 2</th>
+                                                <th>Option 3</th>
+                                                <th>Customer Response</th>
+                                                <th></th>
+                                                <!-- <th></th> -->
+
+                                                <!-- <th>Student Marks</th> -->
+                                                <!-- <th></th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for bill in bill_of_material_data %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{bill.item}}</td>
+                                                <td>{{bill.item_style}}</td>
+                                                <td>{{bill.description}}</td>
+                                                <td>{{bill.color}}</td>
+                                                <td>{{bill.item_content}}</td>
+                                                <td>{{bill.placement}}</td>
+                                                <td>{{bill.size}}</td>
+                                                <td>{{bill.quantity}}</td>
+                                                <td>{{bill.supplier}}</td>
+                                                <td>{{bill.comments}}</td>
+                                                <td>{{bill.pricing_estimate}}</td>
+                                                <td>{{bill.image}}</td>
+                                                <td>{{bill.issue_code}}</td>
+                                                <td>{{bill.issue_description}}</td>
+                                                <td>{{bill.criticality}}</td>
+                                                <td>{{bill.silq_comment}}</td>
+                                                <td>{{bill.option_1}}</td>
+                                                <td>{{bill.option_2}}</td>
+                                                <td>{{bill.option_3}}</td>
+                                                <td>{{bill.customer_response}}</td>
+                                                <td><a href="{% url 'edit_bill_material' pk=project.id id=bill.id %}"><i class="fas fa-edit">edit</i></a></td>
+                                                <!-- <td><a href=""><i class="fas fa-trash"></i></a></td> -->
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="navpills-3" class="tab-pane">
+                        <div class="row">
+                            <div class="col"> 
+                                <div class="btn-group float-right">
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter1">
+                                    Add New 
+                                </button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered fixed" id="file_export">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Item</th>
+                                                <th>POM</th>
+                                                <th>Description</th>
+                                                <th>XS</th>
+                                                <th>S</th>
+                                                <th>M</th>
+                                                <th>L</th>
+                                                <th>XL</th>
+                                                <th>2XL</th>
+                                                <th>3XL</th>
+                                                <th>TOL (+)</th>
+                                                <th>TOL (-)</th>
+                                                <th>Comments</th>
+                                                <th>Issue Code</th>
+                                                <th>Issue Description</th>
+                                                <th>Criticality</th>
+                                                <th>SILQ Comments</th>
+                                                <th>Option 1</th>
+                                                <th>Option 2</th>
+                                                <th>Option 3</th>
+                                                <th>Customer Response</th>
+                                
+                                                <!-- <th>Student Marks</th> -->
+                                                <th></th>
+                                                <!-- <th></th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for bill in measurement_chart_data %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{bill.item2}}</td>
+                                                <td>{{bill.pom}}</td>
+                                                <td>{{bill.description2}}</td>
+                                                <td>{{bill.xtra_small}}</td>
+                                                <td>{{bill.small}}</td>
+                                                <td>{{bill.medium}}</td>
+                                                <td>{{bill.large}}</td>
+                                                <td>{{bill.xtra_large}}</td>
+                                                <td>{{bill.xtra_large2}}</td>
+                                                <td>{{bill.xtra_large3}}</td>
+                                                <td>{{bill.tol_plus}}</td>
+                                                <td>{{bill.tol_minus}}</td>
+                                                <td>{{bill.comments2}}</td>
+                                                <td>{{bill.issue_code2}}</td>
+                                                <td>{{bill.issue_description2}}</td>
+                                                <td>{{bill.criticality2}}</td>
+                                                <td>{{bill.silq_comment2}}</td>
+                                                <td>{{bill.option_1_2}}</td>
+                                                <td>{{bill.option_2_2}}</td>
+                                                <td>{{bill.option_3_2}}</td>
+                                                <td>{{bill.customer_response2}}</td>
+                                                <td><a href="{% url 'edit_measurement_chart' pk=project.id id=bill.id %}">
+                                                    <i class="fas fa-edit">edit</i></a></td>
+                                                <!-- <td><a href=""><i class="fas fa-trash"></i></a></td> -->
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="navpills-4" class="tab-pane">
+                        <div class="row">
+                            <div class="col">
+                            <div class="btn-group float-right">
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter2">
+                                    Add New 
+                                </button>
+                            </div>
+                            <div class="table-responsive">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-bordered fixed" id="file_export">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Section</th>
+                                                <th>Item</th>
+                                                <th>Issue Code</th>
+                                                <th>Issue Description</th>
+                                                <th>Criticality</th>
+                                                <th>SILQ Comments</th>
+                                                <th>Option 1</th>
+                                                <th>Option 2</th>
+                                                <th>Option 3</th>
+                                                <th>Customer Response</th>
+                                                <!-- <th>Student Marks</th> -->
+                                                <th></th>
+                                                <!-- <th></th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for bill in other_issue_data %}
+                                            <tr>
+                                                <td>{{forloop.counter}}</td>
+                                                <td>{{bill.section}}</td>
+                                                <td>{{bill.item3}}</td>
+                                                <td>{{bill.issue_code3}}</td>
+                                                <td>{{bill.issue_description3}}</td>
+                                                <td>{{bill.criticality3}}</td>
+                                                <td>{{bill.silq_comments3}}</td>
+                                                <td>{{bill.option_1_3}}</td>
+                                                <td>{{bill.option_2_3}}</td>
+                                                <td>{{bill.option_3_3}}</td>
+                                                <td>{{bill.customer_response_3}}</td>
+                                                <td><a href="{% url 'edit_other_issue' pk=project.id id=bill.id %}"><i class="fas fa-edit"></i></a></td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal of Bill of Materials  -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-info" id="exampleModalLongTitle">Add New Bill of Materials</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{% url 'new_bill_material' project.id %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Item</label>
+                                {{bill_of_material.item}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Style Item</label>
+                                {{bill_of_material.item_style}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Description</label>
+                                {{bill_of_material.description}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Color</label>
+                                {{bill_of_material.color}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Item Content</label>
+                                {{bill_of_material.item_content}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Placement</label>
+                                {{bill_of_material.placement}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Size</label>
+                                {{bill_of_material.size}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Quantity</label>
+                                {{bill_of_material.quantity}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Supplier</label>
+                                {{bill_of_material.supplier}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Comments</label>
+                                {{bill_of_material.comments}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Pricing Estimate</label>
+                                {{bill_of_material.pricing_estimate}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Image</label>
+                                {{bill_of_material.image}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Issue Code</label>
+                                {{bill_of_material.issue_code}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Issue Description</label>
+                                {{bill_of_material.issue_description}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Criticality</label>
+                                {{bill_of_material.criticality}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">SILQ Comments</label>
+                                {{bill_of_material.silq_comment}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Option 1</label>
+                                {{bill_of_material.option_1}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Option 2</label>
+                                {{bill_of_material.option_2}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Option 3</label>
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                                {{bill_of_material.option_3}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Customer Response</label>
+                                {{bill_of_material.customer_response}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <!-- <div class="col">
+                        </div> -->
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-success" type="submit">Create</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- modal for measurement chart  -->
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-info" id="exampleModalLongTitle">Add New Measurement Chart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{% url 'new_measurement_chart' project.id %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Item</label>
+                                {{measurement_chart.item2}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">POM</label>
+                                {{measurement_chart.pom}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Description</label>
+                                {{measurement_chart.description2}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">XS</label>
+                                {{measurement_chart.xtra_small}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">S</label>
+                                {{measurement_chart.small}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">M</label>
+                                {{measurement_chart.medium}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">L</label>
+                                {{measurement_chart.large}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">XL</label>
+                                {{measurement_chart.xtra_large}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">2XL</label>
+                                {{measurement_chart.xtra_large2}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">3XL</label>
+                                {{measurement_chart.xtra_large3}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">TOL (+)</label>
+                                {{measurement_chart.tol_plus}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">TOL (-)</label>
+                                {{measurement_chart.tol_minus}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Comments</label>
+                                {{measurement_chart.comments2}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Issue Code</label>
+                                {{measurement_chart.issue_code2}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Issue Description</label>
+                                {{measurement_chart.issue_description2}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Criticality</label>
+                                {{measurement_chart.criticality2}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">SILQ Comments</label>
+                                {{measurement_chart.silq_comment2}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Option 1</label>
+                                {{measurement_chart.option_1_2}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Option 2</label>
+                                {{measurement_chart.option_2_2}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Option 3</label>
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                                {{measurement_chart.option_3_2}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Customer Response</label>
+                                {{measurement_chart.customer_response2}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <!-- <div class="col">
+                        </div> -->
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-success" type="submit">Create</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal for other issue  -->
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-info" id="exampleModalLongTitle">Add Other Issues</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{% url 'other_issues' project.id %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Item</label>
+                                {{other_issue.item3}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Section</label>
+                                {{other_issue.section}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Issue Code</label>
+                                {{other_issue.issue_code3}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Issue Description</label>
+                                {{other_issue.issue_description3}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Criticality</label>
+                                {{other_issue.criticality3}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">SILQ Comments</label>
+                                {{other_issue.silq_comments3}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Option 1</label>
+                                {{other_issue.option_1_3}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Option 2</label>
+                                {{other_issue.option_2_3}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Option 3</label>
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                                {{other_issue.option_3_3}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Customer Response</label>
+                                {{other_issue.customer_response_3}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <!-- <div class="col">
+                        </div> -->
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-success" type="submit">Create</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal for overview  -->
+<div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-info" id="exampleModalLongTitle">Add Other Issues</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{% url 'project_overview' project.id %}">
+                    {% csrf_token %}
+                    <div class="row" style="display: none;">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">customer</label>
+                                {{project_form.customer}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">project name</label>
+                                {{project_form.project_name}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Date</label>
+                                {{project_form.date}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">versions</label>
+                                {{project_form.version}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Style</label>
+                                {{project_form.style}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Description</label>
+                                {{project_form.project_description}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Style #</label>
+                                {{project_form.style_hash}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Image Link</label>
+                                {{project_form.image_link}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">PDF Link</label>
+                                {{project_form.pdf_link}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group mb-4">
+                                <label class="mr-sm-2" for="inlineFormCustomSelect">Message From Client</label>
+                                {{project_form.project_note}}
+                                <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-success" type="submit">Update</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    document.getElementById('id_item').classList.add('form-control');
+    document.getElementById('id_item_style').classList.add('form-control');
+    document.getElementById('id_description').classList.add('form-control');
+    document.getElementById('id_color').classList.add('form-control');
+    document.getElementById('id_item_content').classList.add('form-control');
+    document.getElementById('id_placement').classList.add('form-control');
+    document.getElementById('id_size').classList.add('form-control');
+    document.getElementById('id_quantity').classList.add('form-control');
+    document.getElementById('id_supplier').classList.add('form-control');
+    document.getElementById('id_comments').classList.add('form-control');
+    document.getElementById('id_pricing_estimate').classList.add('form-control');
+    document.getElementById('id_image').classList.add('form-control');
+    document.getElementById('id_issue_code').classList.add('form-control');
+    document.getElementById('id_issue_description').classList.add('form-control');
+    document.getElementById('id_criticality').classList.add('form-control');
+    document.getElementById('id_silq_comment').classList.add('form-control');
+    document.getElementById('id_option_1').classList.add('form-control');
+    document.getElementById('id_option_2').classList.add('form-control');
+    document.getElementById('id_option_3').classList.add('form-control');
+    document.getElementById('id_customer_response').classList.add('form-control');
+
+    // measurement chart 
+    document.getElementById('id_item2').classList.add('form-control');
+    document.getElementById('id_description2').classList.add('form-control');
+    document.getElementById('id_pom').classList.add('form-control');
+    document.getElementById('id_xtra_small').classList.add('form-control');
+    document.getElementById('id_small').classList.add('form-control');
+    document.getElementById('id_medium').classList.add('form-control');
+    document.getElementById('id_large').classList.add('form-control');
+    document.getElementById('id_xtra_large').classList.add('form-control');
+    document.getElementById('id_xtra_large2').classList.add('form-control');
+    document.getElementById('id_xtra_large3').classList.add('form-control');
+    document.getElementById('id_tol_plus').classList.add('form-control');
+    document.getElementById('id_tol_minus').classList.add('form-control');
+    document.getElementById('id_comments2').classList.add('form-control');
+    document.getElementById('id_issue_code2').classList.add('form-control');
+    document.getElementById('id_issue_description2').classList.add('form-control');
+    document.getElementById('id_criticality2').classList.add('form-control');
+    document.getElementById('id_silq_comment2').classList.add('form-control');
+    document.getElementById('id_option_1_2').classList.add('form-control');
+    document.getElementById('id_option_2_2').classList.add('form-control');
+    document.getElementById('id_option_3_2').classList.add('form-control');
+    document.getElementById('id_customer_response2').classList.add('form-control');
+
+
+    // other issues 
+    document.getElementById('id_item3').classList.add('form-control');
+    document.getElementById('id_section').classList.add('form-control');
+    document.getElementById('id_issue_code3').classList.add('form-control');
+    document.getElementById('id_issue_description3').classList.add('form-control');
+    document.getElementById('id_criticality3').classList.add('form-control');
+    document.getElementById('id_silq_comments3').classList.add('form-control');
+    document.getElementById('id_option_1_3').classList.add('form-control');
+    document.getElementById('id_option_2_3').classList.add('form-control');
+    document.getElementById('id_option_3_3').classList.add('form-control');
+    document.getElementById('id_customer_response_3').classList.add('form-control');
+    // document.getElementById('id_silq_comment').placeholder = "Company Name";
+    // document.getElementById('id_option_1').placeholder = "Email";
+    // document.getElementById('id_option_2').placeholder = "Password";
+    // document.getElementById('id_option_3').placeholder = "Confirm Password";
+    // document.getElementById('id_customer_response').placeholder = "Confirm Password";
+
+    document.getElementById('id_date').classList.add('form-control');
+    document.getElementById('id_date').setAttribute("type", "date");
+    document.getElementById('id_version').classList.add('form-control');
+    document.getElementById('id_style').classList.add('form-control');
+    document.getElementById('id_project_description').classList.add('form-control');
+    document.getElementById('id_style_hash').classList.add('form-control');
+    document.getElementById('id_image_link').classList.add('form-control');
+    document.getElementById('id_pdf_link').classList.add('form-control');
+    document.getElementById('id_project_note').classList.add('form-control');
+    
+</script>
+
+{% endblock %}

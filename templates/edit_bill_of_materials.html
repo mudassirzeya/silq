@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="p-4">
+<div class="card">
+    <div class="card-body">
+        <form method="POST" action="{% url 'edit_bill_material' pk=project.id id=bill_material.id %}">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Item</label>
+                        {{form.item}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Style Item</label>
+                        {{form.item_style}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Description</label>
+                        {{form.description}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Color</label>
+                        {{form.color}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Item Content</label>
+                        {{form.item_content}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Placement</label>
+                        {{form.placement}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Size</label>
+                        {{form.size}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Quantity</label>
+                        {{form.quantity}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Supplier</label>
+                        {{form.supplier}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Comments</label>
+                        {{form.comments}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Pricing Estimate</label>
+                        {{form.pricing_estimate}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Image</label>
+                        {{form.image}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Issue Code</label>
+                        {{form.issue_code}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Issue Description</label>
+                        {{form.issue_description}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Criticality</label>
+                        {{form.criticality}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">SILQ Comments</label>
+                        {{form.silq_comment}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Option 1</label>
+                        {{form.option_1}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Option 2</label>
+                        {{form.option_2}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Option 3</label>
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        {{form.option_3}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <label class="mr-sm-2" for="inlineFormCustomSelect">Customer Response</label>
+                        {{form.customer_response}}
+                        <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                    </div>
+                </div>
+                <!-- <div class="col">
+                            </div> -->
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="">
+                    <button class="btn btn-success" type="submit">Update</button>
+                </div>
+                &nbsp;&nbsp;
+                <div class="">
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+
+<!-- modal for delete  -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'delete_bill_material' pk=project.id id=bill_material.id %}" method="post">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <h2>Are You Sure You Want To Delete This Bill Of Materials ?</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Yes I am Sure</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('id_item').classList.add('form-control');
+    document.getElementById('id_item_style').classList.add('form-control');
+    document.getElementById('id_description').classList.add('form-control');
+    document.getElementById('id_color').classList.add('form-control');
+    document.getElementById('id_item_content').classList.add('form-control');
+    document.getElementById('id_placement').classList.add('form-control');
+    document.getElementById('id_size').classList.add('form-control');
+    document.getElementById('id_quantity').classList.add('form-control');
+    document.getElementById('id_supplier').classList.add('form-control');
+    document.getElementById('id_comments').classList.add('form-control');
+    document.getElementById('id_pricing_estimate').classList.add('form-control');
+    document.getElementById('id_image').classList.add('form-control');
+    document.getElementById('id_issue_code').classList.add('form-control');
+    document.getElementById('id_issue_description').classList.add('form-control');
+    document.getElementById('id_criticality').classList.add('form-control');
+    document.getElementById('id_silq_comment').classList.add('form-control');
+    document.getElementById('id_option_1').classList.add('form-control');
+    document.getElementById('id_option_2').classList.add('form-control');
+    document.getElementById('id_option_3').classList.add('form-control');
+    document.getElementById('id_customer_response').classList.add('form-control');
+</script>
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="p-4">
+    <div class="card">
+        <div class="card-body">
+            <form method="POST" action="{% url 'edit_po_summary' pk=customer.id id=po_summary.id %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Project Type</label>
+                            {{form.project_type}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Project Name</label>
+                            {{form.project_name}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Customer PO Number</label>
+                            {{form.customer_po_number}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Total PO Value</label>
+                            {{form.total_po_value}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Project Recieved Date</label>
+                            {{form.project_recieved_date}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Project Estimated Delivery Date</label>
+                            {{form.project_estimated_delivery_date}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Project Actual Delivery Date</label>
+                            {{form.project_actual_delivery_date}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group mb-4">
+                            <label class="mr-sm-2" for="inlineFormCustomSelect">Status</label>
+                            {{form.status}}
+                            <!-- <input type="text" class="form-control" placeholder="Name" name="name" id="" required> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <div class="">
+                        <button class="btn btn-success" type="submit">Update</button>
+                    </div>
+                    &nbsp;&nbsp;
+                    <div class="">
+                        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- modal for delete  -->
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'delete_po_summary' pk=customer.id id=po_summary.id %}" method="post">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <h2>Are You Sure You Want To Delete This Bill Of Materials ?</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Yes I am Sure</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('id_project_type').classList.add('form-control');
+        document.getElementById('id_project_name').classList.add('form-control');
+        document.getElementById('id_customer_po_number').classList.add('form-control');
+        document.getElementById('id_total_po_value').classList.add('form-control');
+        document.getElementById('id_project_recieved_date').classList.add('form-control');
+        document.getElementById('id_project_estimated_delivery_date').classList.add('form-control');
+        document.getElementById('id_project_actual_delivery_date').classList.add('form-control');
+        document.getElementById('id_status').classList.add('form-control');
+        document.getElementById('id_project_recieved_date').setAttribute('type', 'date');
+        document.getElementById('id_project_estimated_delivery_date').setAttribute('type', 'date');
+        document.getElementById('id_project_actual_delivery_date').setAttribute('type', 'date');
+</script>
+{% endblock %}
